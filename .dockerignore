@@ -27,3 +27,12 @@ node_modules/
 
 # ignore markdown
 *.md
+
+# ignore workflows
+.github
+
+# ignore compose
+docker-compose.yml
+
+# ignore scripts
+scripts
