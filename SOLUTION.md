@@ -22,5 +22,33 @@ docker run --rm -it --name ctwp -p 8080:80 akuma5157/ctwp:latest
 ```
 
 ## Setup a pipeline to build the container when changes are pushed to the repository
-1. get sample yaml from https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages and write to [workflow file](.github/workflows/docker-image.yml)   
-2. [update conditional](.github/workflows/docker-image.yml#L4) to enable builds on each push to any branch  
+1. get sample yaml from https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages and write to [workflow file](.github/workflows/docker-fargate.yml)   
+2. [update conditional](.github/workflows/docker-fargate.yml#L4) to enable builds on each push to any branch  
+
+
+## Setup a pipeline to deploy the freshly build container to Fargate
+1. get sample docker-compose.yml from https://docs.docker.com/samples/wordpress
+2. update container image name, port, DB creds and volume mounts in docker-compose.yml
+3. test compose file with:
+```
+docker-compose up
+# check app on browser
+docker-compose down
+```
+
+4. install compose-cli. run:
+```
+curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+logout
+```
+5. reload shell session
+6. ensure aws configuration profile is present
+7. set up ecs context and create stack with:
+```
+docker context create ecs myecscontext
+
+docker context use myecscontext ecs
+
+docker-compose up
+```
+8. add [script](scripts/compose.sh) and [job](.github/workflows/docker-fargate.yml#L52) for deployment
