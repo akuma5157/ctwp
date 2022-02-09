@@ -49,6 +49,16 @@ docker context create ecs myecscontext
 
 docker context use myecscontext ecs
 
-docker-compose up
+docker compose up
 ```
 8. add [script](scripts/compose.sh) and [job](.github/workflows/docker-fargate.yml#L52) for deployment
+
+## Provision all the AWS resources you used via CloudFormation or Terraform or any other infrastructure as code framework
+1. ensure compose stack is up on ecs
+``` 
+docker compose up
+```
+2. convert compose stack to [cloudformation template](cloudformation.yml)
+```
+docker compose convert > cloudformation.yml
+```
