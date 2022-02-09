@@ -62,3 +62,10 @@ docker compose up
 ```
 docker compose convert > cloudformation.yml
 ```
+
+
+## Tear down
+run in any shell with proper aws profile and binaries:
+```
+docker compose down
+```
