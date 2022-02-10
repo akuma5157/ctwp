@@ -39,13 +39,15 @@ docker-compose down
 4. install compose-cli. run:
 ```
 curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
-logout
 ```
-5. reload shell session
+5. reload shell session  
+```
+exec bash
+```
 6. ensure aws configuration profile is present
 7. set up ecs context and create stack with:
 ```
-docker context create ecs myecscontext
+docker context create ecs myecscontext --profile default
 
 docker context use myecscontext ecs
 
@@ -63,6 +65,8 @@ docker compose up
 docker compose convert > cloudformation.yml
 ```
 
+## Instances of wordpress should horizontally scale to handle an increase in traffic
+1. add [autoscaling properties](docker-compose.yml#L29) to wordpress service in docker-compose.yml
 
 ## Tear down
 run in any shell with proper aws profile and binaries:
