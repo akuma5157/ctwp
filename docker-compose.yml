@@ -26,6 +26,11 @@ services:
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
       WORDPRESS_DB_NAME: wordpress
+    deploy:
+      x-aws-autoscaling:
+        min: 1
+        max: 2
+        cpu: 75
 volumes:
   db_data: {}
   ctwp-uploads: {}
