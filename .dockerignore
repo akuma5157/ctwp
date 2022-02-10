@@ -36,3 +36,6 @@ docker-compose.yml
 
 # ignore scripts
 scripts
+
+# ignore iam policy json
+iam-policy.json
