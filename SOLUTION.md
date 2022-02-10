@@ -68,6 +68,12 @@ docker compose convert > cloudformation.yml
 ## Instances of wordpress should horizontally scale to handle an increase in traffic
 1. add [autoscaling properties](docker-compose.yml#L29) to wordpress service in docker-compose.yml
 
+
+## Use IAM best practices to ensure better security
+1. Create a policy as recommended at [Docker ECS Integration Prerequisites](https://docs.docker.com/cloud/ecs-integration/#run-an-application-on-ecs), [see example](iam-policy.json).
+2. Create a group for all principals that will be handling this set of resources. e.g. your local cli, github-actions etc.
+3. Create separate users for all principals and add them to your group.
+4. Disable access keys when not being actively used.
 ## Tear down
 run in any shell with proper aws profile and binaries:
 ```
